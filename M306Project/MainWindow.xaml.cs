@@ -1,4 +1,22 @@
-﻿using System;
+﻿//==================================
+//
+// ------====== Auteurs ======------
+//      Barbey Guillaume
+//      Rausis Justin
+//
+// ---=== Version ===---
+//      1.01
+//
+// ---=== Ajouts ===--
+//      Implémentation de
+//      l'interface de base
+//      et ajout des commentaires
+//      de base.
+//      Ajout de la classe Personne.cs
+//
+//==================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
