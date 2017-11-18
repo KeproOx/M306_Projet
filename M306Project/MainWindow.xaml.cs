@@ -5,15 +5,12 @@
 //      Rausis Justin
 //
 // ---=== Version ===---
-//      1.01
+//      1.05
 //
 // ---=== Ajouts ===--
-//      Implémentation de
-//      l'interface de base
-//      et ajout des commentaires
-//      de base.
-//      Ajout de la classe Personne.cs
-//
+//      Ajout du struct Groupe
+//      pour la relation Personne - Groupe
+//      boucle de test pour remplissage d'un groupe
 //==================================
 
 using System;
@@ -38,9 +35,27 @@ namespace M306Project
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Structure permettant de stocker plusieurs personnes dans plusieurs groupes
+        /// </summary>
+        struct Groupe
+        {
+            public Personne[] GrpPersonne;
+        }
+
+
         public MainWindow()
         {
             InitializeComponent();
+            Groupe grp;
+            grp.GrpPersonne = new Personne[10];
+            for (int i = 0; i < 10; i++)
+            {
+                Personne pers;
+                pers = new Personne();
+                pers.AgePersonne = i+1;
+                grp.GrpPersonne[i] = pers;
+            }
         }
     }
 }
