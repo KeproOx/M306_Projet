@@ -26,7 +26,7 @@ namespace M306Project
         #region Champs de classe
 
         private int iAgePersonne; // Contiendra l'âge de la personne
-        private bool? iSexePersonne; // Contiendra le sexe de la personne, 0 est un homme, 1 une femme, et 0 indéfini
+        private bool? iSexePersonne; // Contiendra le sexe de la personne, 0 est un homme, 1 une femme, et null indéfini
         private string sMetier; // Contiendra le métier de la personne
 
         #endregion Champs de classe

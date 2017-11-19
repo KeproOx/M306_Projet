@@ -5,12 +5,12 @@
 //      Rausis Justin
 //
 // ---=== Version ===---
-//      1.05
+//      1.1
 //
 // ---=== Ajouts ===--
-//      Ajout du struct Groupe
-//      pour la relation Personne - Groupe
-//      boucle de test pour remplissage d'un groupe
+//      Ebauche d'interface graphique
+//      avec nommage des objets
+//      création des events button
 //==================================
 
 using System;
@@ -56,6 +56,26 @@ namespace M306Project
                 pers.AgePersonne = i+1;
                 grp.GrpPersonne[i] = pers;
             }
+        }
+
+        /// <summary>
+        /// Event pour le bouton "Ouvrir fichier texte"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOpenTxt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Event pour le bouton "Grouper aléatoirement"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGrouper_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
