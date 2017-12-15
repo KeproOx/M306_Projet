@@ -11,6 +11,7 @@
 //      Ebauche d'interface graphique
 //      avec nommage des objets
 //      création des events button
+//      ajout d'un opf pour lecture fichiers
 //==================================
 
 using System;
@@ -27,6 +28,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//
+using System.IO;
+using Microsoft.Win32;
+
 
 namespace M306Project
 {
@@ -53,9 +58,11 @@ namespace M306Project
             {
                 Personne pers;
                 pers = new Personne();
-                pers.AgePersonne = i+1;
                 grp.GrpPersonne[i] = pers;
+                lstPersonnes.Items.Add(grp.GrpPersonne[i].Metier);
             }
+
+            
         }
 
         /// <summary>
@@ -65,6 +72,8 @@ namespace M306Project
         /// <param name="e"></param>
         private void btnOpenTxt_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog opf = new OpenFileDialog();
+            opf.ShowDialog();
 
         }
 

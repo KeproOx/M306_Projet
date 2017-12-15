@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//
+using System.Text.RegularExpressions;
 
 namespace M306Project
 {
@@ -28,6 +30,10 @@ namespace M306Project
         private int iAgePersonne; // Contiendra l'âge de la personne
         private bool? iSexePersonne; // Contiendra le sexe de la personne, 0 est un homme, 1 une femme, et null indéfini
         private string sMetier; // Contiendra le métier de la personne
+        private string sNom; // Contiendra le nom de la personne
+        private string sPrenom; // Contiendra le prénom de la personne
+
+        
 
         #endregion Champs de classe
 
@@ -80,6 +86,10 @@ namespace M306Project
                 {
                     iAgePersonne = value;
                 }
+                else
+                {
+                    iAgePersonne = 1;
+                }
             }
         }
 
@@ -100,15 +110,59 @@ namespace M306Project
         /// </summary>
         public string Metier
         {
+
             get { return sMetier; }
             set
             {
-                sMetier = value;
+                if (value != null)
+                {
+                    sMetier = value;
+                }
+                else
+                {
+                    sMetier = "Indéfini";
+                }
+
             }
         }
 
-        
+        /// <summary>
+        /// Définit ou retourne le nom de la personne
+        /// </summary>
+        public string Nom
+        {
+            get { return sNom; }
+            set
+            {
+                if (value != null)
+                {
+                    sNom = value;
+                }
+                else
+                {
+                    sNom = "Indéfini";
+                }
+            }
+        }
 
+        /// <summary>
+        /// Définit ou retourne le nom de la personne
+        /// </summary>
+        public string Prenom
+        {
+            get { return sPrenom; }
+            set
+            {
+                if (value != null)
+                {
+                    sPrenom = value;
+                }
+                else
+                {
+                    sPrenom = "Indéfini";
+                }
+            }
+        }
         #endregion Propriétés
 
         #region Méthodes de classe
@@ -121,6 +175,8 @@ namespace M306Project
             this.AgePersonne = 0;
             this.SexePersonne = null;
             this.Metier = "Indéfini";
+            this.Nom = "Indéfini";
+            this.Prenom = "Indéfini";
         }
 
         #endregion Méthodes de classe
