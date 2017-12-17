@@ -76,17 +76,56 @@ namespace M306Project
                 grp.GrpPersonne = new List<Personne>();
                 do
                 {
-                       
+               
                     Personne pers = new Personne();
                     grp.GrpPersonne.Add(pers);
                     sLigne = readerFile.ReadLine();
                     if (sLigne != null)
                     {
-                        i++;
-                        string[] sTemp = sLigne.Split(';');
-                        grp.GrpPersonne[i].Nom = sTemp[i];
-                        grp.GrpPersonne[i].Prenom = sTemp[i + 1];
                         
+                        string[] sTemp = sLigne.Split(';');
+                        grp.GrpPersonne[i].Nom = sTemp[0];
+                        try
+                        {
+                            grp.GrpPersonne[i].Prenom = sTemp[1];
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        try
+                        {
+                            grp.GrpPersonne[i].Prenom = sTemp[2];
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        try
+                        {
+                            grp.GrpPersonne[i].Prenom = sTemp[3];
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        try
+                        {
+                            grp.GrpPersonne[i].Prenom = sTemp[4];
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        try
+                        {
+                            grp.GrpPersonne[i].Prenom = sTemp[5];
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        i++;
                     }
                 } while (sLigne != null);
             }
