@@ -45,24 +45,13 @@ namespace M306Project
         /// </summary>
         struct Groupe
         {
-            public Personne[] GrpPersonne;
+            public List<Personne> GrpPersonne;
         }
 
 
         public MainWindow()
         {
             InitializeComponent();
-            Groupe grp;
-            grp.GrpPersonne = new Personne[10];
-            for (int i = 0; i < 10; i++)
-            {
-                Personne pers;
-                pers = new Personne();
-                grp.GrpPersonne[i] = pers;
-                lstPersonnes.Items.Add(grp.GrpPersonne[i].Metier);
-            }
-
-            
         }
 
         /// <summary>
@@ -73,7 +62,35 @@ namespace M306Project
         private void btnOpenTxt_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog opf = new OpenFileDialog();
+            FileInfo fFichierTexte;
+            StreamReader readerFile;
             opf.ShowDialog();
+
+            if (opf.FileName != "")
+            {
+                string sLigne = "";
+                fFichierTexte = new FileInfo(opf.FileName);
+                readerFile = new StreamReader(fFichierTexte.FullName);
+                Groupe grp;
+                int i = 0;
+                grp.GrpPersonne = new List<Personne>();
+                do
+                {
+                       
+                    Personne pers = new Personne();
+                    grp.GrpPersonne.Add(pers);
+                    sLigne = readerFile.ReadLine();
+                    if (sLigne != null)
+                    {
+                        i++;
+                        string[] sTemp = sLigne.Split(';');
+                        grp.GrpPersonne[i].Nom = sTemp[i];
+                        grp.GrpPersonne[i].Prenom = sTemp[i + 1];
+                        
+                    }
+                } while (sLigne != null);
+            }
+
 
         }
 

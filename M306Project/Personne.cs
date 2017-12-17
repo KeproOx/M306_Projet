@@ -179,6 +179,24 @@ namespace M306Project
             this.Prenom = "Indéfini";
         }
 
-        #endregion Méthodes de classe
+        /// <summary>
+        /// Méthode permettant de modifier l'âge de la personne
+        /// </summary>
+        /// <param name="age"></param>
+        public void ModifierAge(int age)
+        {
+            this.AgePersonne = age;
+        }
+
+        /// <summary>
+        /// Méthode permettant le tri d'un tableau de personne
+        /// </summary>
+        /// <param name="tabPersonne">Tableau à trier</param>
+        /// <returns>Retourne le tableau trié</returns>
+        public Personne[] TrierPersonnes(Personne[] tabPersonne)
+        {
+            return tabPersonne;
+        }
+            #endregion Méthodes de classe
     }
 }
