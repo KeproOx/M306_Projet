@@ -10,6 +10,10 @@
         <ListBox x:Name="lstPersonnes" HorizontalAlignment="Left" Height="299" Margin="10,10,0,0" VerticalAlignment="Top" Width="119"/>
         <Button x:Name="btnGrouper" Content="Grouper aléatoirement" HorizontalAlignment="Left" Margin="134,289,0,0" VerticalAlignment="Top" Width="151" Click="btnGrouper_Click"/>
         <Button x:Name="btnOpenTxt" Content="Ouvrir fichier texte" HorizontalAlignment="Left" Margin="134,264,0,0" VerticalAlignment="Top" Width="151" Click="btnOpenTxt_Click"/>
+        <Button x:Name="btnGrouperSuite" Content="Grouper à la suite" HorizontalAlignment="Left" Margin="290,264,0,0" VerticalAlignment="Top" Width="108" Click="btnGrouperSuite_Click"/>
+        <TextBox x:Name="txtNbreGroupes" HorizontalAlignment="Left" Height="23" Margin="206,77,0,0" TextWrapping="Wrap" Text="NbreGroupes" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblInfo" Content="Nbre Personnes totales :" HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" Width="173"/>
+        <Label x:Name="lblTotPers" Content="?" HorizontalAlignment="Left" Margin="269,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

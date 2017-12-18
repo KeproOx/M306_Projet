@@ -47,6 +47,7 @@ namespace M306Project
         {
             public List<Personne> GrpPersonne;
         }
+        Groupe grp; 
 
 
         public MainWindow()
@@ -71,20 +72,26 @@ namespace M306Project
                 string sLigne = "";
                 fFichierTexte = new FileInfo(opf.FileName);
                 readerFile = new StreamReader(fFichierTexte.FullName);
-                Groupe grp;
                 int i = 0;
                 grp.GrpPersonne = new List<Personne>();
                 do
                 {
                
-                    Personne pers = new Personne();
-                    grp.GrpPersonne.Add(pers);
+                    
                     sLigne = readerFile.ReadLine();
                     if (sLigne != null)
                     {
-                        
+                        Personne pers = new Personne();
+                        grp.GrpPersonne.Add(pers);
                         string[] sTemp = sLigne.Split(';');
-                        grp.GrpPersonne[i].Nom = sTemp[0];
+                        try
+                        {
+                            grp.GrpPersonne[i].Nom = sTemp[0];
+                        }
+                        catch (Exception)
+                        {
+
+                        }
                         try
                         {
                             grp.GrpPersonne[i].Prenom = sTemp[1];
@@ -95,7 +102,7 @@ namespace M306Project
                         }
                         try
                         {
-                            grp.GrpPersonne[i].Prenom = sTemp[2];
+                            grp.GrpPersonne[i].AgePersonne = int.Parse(sTemp[2]);
                         }
                         catch (Exception)
                         {
@@ -103,7 +110,19 @@ namespace M306Project
                         }
                         try
                         {
-                            grp.GrpPersonne[i].Prenom = sTemp[3];
+                            if (sTemp[3]=="h")
+                            {
+                                grp.GrpPersonne[i].SexePersonne = false;
+                            }
+                            else if (sTemp[3] =="f")
+                            {
+                                grp.GrpPersonne[i].SexePersonne = true;
+                            }
+                            else
+                            {
+                                grp.GrpPersonne[i].SexePersonne = null;
+                            }
+                            
                         }
                         catch (Exception)
                         {
@@ -111,23 +130,19 @@ namespace M306Project
                         }
                         try
                         {
-                            grp.GrpPersonne[i].Prenom = sTemp[4];
+                            grp.GrpPersonne[i].Metier = sTemp[4];
                         }
                         catch (Exception)
                         {
 
                         }
-                        try
-                        {
-                            grp.GrpPersonne[i].Prenom = sTemp[5];
-                        }
-                        catch (Exception)
-                        {
-
-                        }
+                        lstPersonnes.Items.Add(grp.GrpPersonne[i].Nom + " " + grp.GrpPersonne[i].Prenom);
                         i++;
+                        
                     }
                 } while (sLigne != null);
+                readerFile.Close();
+                lblTotPers.Content = i.ToString();
             }
 
 
@@ -142,5 +157,59 @@ namespace M306Project
         {
 
         }
+
+        private void btnGrouperSuite_Click(object sender, RoutedEventArgs e)
+        {
+            lstPersonnes.Items.Clear();
+            int NbrePersonnesTot = int.Parse(lblTotPers.Content.ToString());
+            int NbreGroupes = int.Parse(txtNbreGroupes.Text);
+            if (NbrePersonnesTot % NbreGroupes == 0)
+            {
+                int idx = 0;
+                int NbGrp = 1;
+                lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                foreach (Personne pers in grp.GrpPersonne)
+                {
+                    idx++;
+                    
+                    if (idx <= NbrePersonnesTot / NbreGroupes)
+                    {
+                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                    }
+                    else
+                    {
+                        NbGrp++;
+                        lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                        idx = 1;
+                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);                                            
+                    }
+                    
+                }
+            }
+            else
+            {
+                //recherche du nombre qui ferait modulo le plus proche
+                int idx = 0;
+                int NbGrp = 1;
+                lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                foreach (Personne pers in grp.GrpPersonne)
+                {
+                    idx++;
+                    if (idx <= NbrePersonnesTot % NbreGroupes)
+                    {
+                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                    }
+                    else
+                    {
+                        NbGrp++;
+                        lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                        idx = 1;
+                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                    }
+
+                }
+            }
+        }
     }
 }
+
