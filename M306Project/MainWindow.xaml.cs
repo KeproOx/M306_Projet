@@ -142,8 +142,9 @@ namespace M306Project
                     }
                 } while (sLigne != null);
                 readerFile.Close();
-                lblTotPers.Content = i.ToString();
+                lblPersTot.Content = i.ToString();
             }
+            
 
 
         }
@@ -155,13 +156,18 @@ namespace M306Project
         /// <param name="e"></param>
         private void btnGrouper_Click(object sender, RoutedEventArgs e)
         {
-
+            GrouperRandom();
         }
 
         private void btnGrouperSuite_Click(object sender, RoutedEventArgs e)
         {
+            GrouperSuite();
+        }
+
+        private void GrouperSuite()
+        {
             lstPersonnes.Items.Clear();
-            int NbrePersonnesTot = int.Parse(lblTotPers.Content.ToString());
+            int NbrePersonnesTot = int.Parse(lblPersTot.Content.ToString());
             int NbreGroupes = int.Parse(txtNbreGroupes.Text);
             if (NbrePersonnesTot % NbreGroupes == 0)
             {
@@ -171,31 +177,8 @@ namespace M306Project
                 foreach (Personne pers in grp.GrpPersonne)
                 {
                     idx++;
-                    
+
                     if (idx <= NbrePersonnesTot / NbreGroupes)
-                    {
-                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
-                    }
-                    else
-                    {
-                        NbGrp++;
-                        lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
-                        idx = 1;
-                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);                                            
-                    }
-                    
-                }
-            }
-            else
-            {
-                //recherche du nombre qui ferait modulo le plus proche
-                int idx = 0;
-                int NbGrp = 1;
-                lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
-                foreach (Personne pers in grp.GrpPersonne)
-                {
-                    idx++;
-                    if (idx <= NbrePersonnesTot % NbreGroupes)
                     {
                         lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
                     }
@@ -208,6 +191,118 @@ namespace M306Project
                     }
 
                 }
+            }
+            else
+            {
+                //recherche du nombre qui ferait modulo le plus proche
+                bool ModuloPasCorrect = true;
+                int iNbrePersonneTrop = 0;
+                int iNbrePersonneCorrect = 0;
+                while (ModuloPasCorrect)
+                {
+                    NbrePersonnesTot--;
+                    iNbrePersonneTrop++;
+                    if (NbrePersonnesTot % NbreGroupes == 0)
+                    {
+                        ModuloPasCorrect = false;
+                        iNbrePersonneCorrect = NbrePersonnesTot;
+                    }
+                }
+                int idx = 1;
+                int NbGrp = 1;
+                lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                foreach (Personne pers in grp.GrpPersonne)
+                {
+
+                    if (idx < iNbrePersonneCorrect)
+                    {
+                        if (idx <= NbrePersonnesTot / NbreGroupes)
+                        {
+                            lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                            idx++;
+                        }
+                        else
+                        {
+                            NbGrp++;
+                            lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                            idx = 1;
+                            lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+                //Affectation normale des personnes en se basant sur le nombre correct
+            }
+        }
+
+        private void GrouperRandom()
+        {
+            lstPersonnes.Items.Clear();
+            int idx = 0;
+            Random rnd = new Random();
+            //remplissage du tableau random
+            List<Personne> persList = new List<Personne>();
+            idx = 0;
+            int NbrePersonnesTot = int.Parse(lblPersTot.Content.ToString());
+            int NbreGroupes = int.Parse(txtNbreGroupes.Text);
+            if (NbrePersonnesTot % NbreGroupes == 0)
+            {
+                List<int> iAncienRnd = new List<int>();
+                int NbGrp = 1;
+                lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                while (persList.Count < grp.GrpPersonne.Count)
+                {
+                    int irnd = rnd.Next(grp.GrpPersonne.Count);
+                    if (!iAncienRnd.Contains(irnd))
+                    {
+                        persList.Add(grp.GrpPersonne[irnd]);
+                        iAncienRnd.Add(irnd);
+                    }
+                }
+                idx = 1;
+                foreach (Personne pers in persList)
+                {
+                    
+
+                    if (idx <= NbrePersonnesTot / NbreGroupes)
+                    {
+                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                        idx++;
+                    }
+                    else
+                    {
+                        NbGrp++;
+                        lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                        idx = 1;
+                        lstPersonnes.Items.Add(pers.Nom + pers.Prenom);
+                    }
+                }
+            }
+            else
+            {
+                //recherche du nombre qui ferait modulo le plus proche
+                bool ModuloPasCorrect = true;
+                int iNbrePersonneTrop = 0;
+                int iNbrePersonneCorrect = 0;
+                while (ModuloPasCorrect)
+                {
+                    NbrePersonnesTot--;
+                    iNbrePersonneTrop++;
+                    if (NbrePersonnesTot % NbreGroupes == 0)
+                    {
+                        ModuloPasCorrect = false;
+                        iNbrePersonneCorrect = NbrePersonnesTot;
+                    }
+                }
+                idx = 1;
+                int NbGrp = 1;
+                int iAncienRnd = 0;
+                lstPersonnes.Items.Add("Groupe " + NbGrp.ToString());
+                //Affectation normale des personnes en se basant sur le nombre correct
             }
         }
     }
